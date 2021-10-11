@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage ('Compile Sta') {
+        stage ('Compile Stage') {
 
             steps {
                 withMaven(maven : 'maven_3_5_0') {
