@@ -2,25 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage ('Compile Stage') {
-
+        stage ('Git Install') {
             steps {                                     
-					echo"Maven install done"                
+					git clone "https://github.com/Sumesh1212/jenkins-example.git"
+					git checkout master
             }
         }
 
-        stage ('Testing Stage') {
-
-            steps {                                   
-					echo "testing done"                
+        stage ('Sonarqube Analysis') {
+            steps {                   
+				environment {
+					scannerHome = tool 'SonarQubeScanner'
+				}
+				steps {
+					withSonarQubeEnv('sonarqube') {
+						sh "${scannerHome}/bin/sonar-scanner"
+					}
+					timeout(time: 10, unit: 'MINUTES') {
+						waitForQualityGate abortPipeline: true
+					}
+				}                
             }
         }
 
 
         stage ('Deployment Stage') {
-            steps {                
-					echo "Deploy done"                
-            }
-        }
+            echo "Deploy done"
     }
 }
