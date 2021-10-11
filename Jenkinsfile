@@ -29,4 +29,5 @@ pipeline {
         stage ('Deployment Stage') {
             echo "Deploy done"
     }
+	}
 }
