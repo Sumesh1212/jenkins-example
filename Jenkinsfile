@@ -9,7 +9,7 @@ pipeline {
 		checkout changelog: false, 
         		poll: false, 
         		scm: [$class: 'GitSCM', branches: [[name: pipelineBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
-        		userRemoteConfigs: [[credentialsId: 'GitHub', url: "https://github.com/Sumesh1212/jenkins-example.git"]]]
+        		userRemoteConfigs: [[credentialsId: 'GitHub_Token', url: "https://github.com/Sumesh1212/jenkins-example.git"]]]
             }
         }
 
