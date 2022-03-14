@@ -14,9 +14,9 @@ pipeline {
 
 		stage ('Sonarqube Analysis') {
 			steps{
-				def mvn = tool 'Default Maven';
-				withSonarQubeEnv() {
-					sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Sample:7899756022"
+				def scannerHome = tool 'SonarScanner 2.8';
+				withSonarQubeEnv('My SonarQube Server') {
+					sh "${scannerHome}/bin/sonar-scanner"
 				}
 				timeout(time: 10, unit: 'MINUTES') {
 					waitForQualityGate abortPipeline: true
