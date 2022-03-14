@@ -16,14 +16,9 @@ pipeline {
         stage ('Sonarqube Analysis') {
             steps {
 		    steps {
-			    withSonarQubeEnv('SonarQube',envOnly: true) {
-				     sh "export PATH=/opt/sonar-scanner/bin:$PATH ; \
-				    sonar-scanner \
-				    -Dsonar.projectName=jenkins-example
-				    -Dsonar.projectKey=Sample:7899756022
-				    -Dsonar.sources=${sonarProperties.projectName}				    
-				    -Dsonar.projectVersion=1.0
-				    -Dsonar.branch.name=master				    
+			    def scannerhome = tool 'Sonar-Scanner';
+			    withSonarQubeEnv('SonarQube') {
+				    sh """${scannerhome}/bin/sonar-runner -D sonar.login = admin -D sonar.password = Sumesh@1294 """
 			    }
 			    timeout(time: 10, unit: 'MINUTES') {
 				    waitForQualityGate abortPipeline: true
