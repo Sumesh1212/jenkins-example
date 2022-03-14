@@ -2,8 +2,7 @@ import jenkins.model.*
 jenkins = Jenkins.instance
 pipeline {
     agent any
-
-    stages {
+    
         stage ('Git Install') {
             steps {                                     
 		checkout changelog: false, 
@@ -13,7 +12,7 @@ pipeline {
             }
         }
 
-        stage ('Sonarqube Analysis') {
+        stage ('Sonarqube Analysis') {		 
 		def scannerhome = tool 'Sonar-Scanner';
 		withSonarQubeEnv('SonarQube') {
 			sh """${scannerhome}/bin/sonar-runner -D sonar.login = admin -D sonar.password = Sumesh@1294 """
@@ -21,6 +20,5 @@ pipeline {
 		timeout(time: 10, unit: 'MINUTES') {
 			waitForQualityGate abortPipeline: true
 		}	
-	}
-    }
+	}    
 }
