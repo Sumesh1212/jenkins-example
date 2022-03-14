@@ -14,12 +14,14 @@ pipeline {
 
 		stage ('Sonarqube Analysis') {
 			steps{
-				def scannerHome = tool 'SonarScanner 2.8';
-				withSonarQubeEnv('My SonarQube Server') {
-					sh "${scannerHome}/bin/sonar-scanner"
-				}
-				timeout(time: 10, unit: 'MINUTES') {
-					waitForQualityGate abortPipeline: true
+				step{
+					def scannerHome = tool 'SonarScanner 2.8';
+					withSonarQubeEnv('My SonarQube Server') {
+						sh "${scannerHome}/bin/sonar-scanner"
+					}
+					timeout(time: 10, unit: 'MINUTES') {
+						waitForQualityGate abortPipeline: true
+					}
 				}
 			}
 		}
