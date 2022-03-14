@@ -9,7 +9,7 @@ pipeline {
 					poll: false, 
 					scm: [$class: 'GitSCM', branches: [[name: pipelineBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
 					userRemoteConfigs: [[credentialsId: 'GitHub_Token', url: "https://github.com/Sumesh1212/jenkins-example.git"]]]*/
-				checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub_Token', url: 'https://github.com/Sumesh1212/jenkins-example.git']]]
+				checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Sumesh1212/jenkins-example.git']]]
 			    }
 			}
 		stage('Sonar scan execution') {
