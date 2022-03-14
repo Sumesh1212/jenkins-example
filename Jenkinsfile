@@ -17,7 +17,7 @@ pipeline {
             steps {
 		    steps {
 			    withSonarQubeEnv('SonarQube',envOnly: true) {
-				    sh "${scannerHome}/bin/sonar-scanner"
+				    ///sh "${scannerHome}/bin/sonar-scanner"
 				    println ${env.SONAR_HOST_URL}
 			    }
 			    timeout(time: 10, unit: 'MINUTES') {
