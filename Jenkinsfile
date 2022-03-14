@@ -16,8 +16,9 @@ pipeline {
         stage ('Sonarqube Analysis') {
             steps {
 		    steps {
-			    withSonarQubeEnv('sonarqube') {
+			    withSonarQubeEnv('SonarQube',envOnly: true) {
 				    sh "${scannerHome}/bin/sonar-scanner"
+				    println ${env.SONAR_HOST_URL}
 			    }
 			    timeout(time: 10, unit: 'MINUTES') {
 				    waitForQualityGate abortPipeline: true
