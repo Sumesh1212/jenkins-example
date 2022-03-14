@@ -14,9 +14,9 @@ pipeline {
 
 		stage ('Sonarqube Analysis') {
 			steps{
-				def scannerhome = tool 'Sonar-Scanner';
-				withSonarQubeEnv('SonarQube') {
-					sh """${scannerhome}/bin/sonar-runner -D sonar.login = admin -D sonar.password = Sumesh@1294 """
+				def mvn = tool 'Default Maven';
+				withSonarQubeEnv() {
+					sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Sample:7899756022"
 				}
 				timeout(time: 10, unit: 'MINUTES') {
 					waitForQualityGate abortPipeline: true
