@@ -10,10 +10,16 @@ pipeline {
 				userRemoteConfigs: [[credentialsId: 'GitHub_Token', url: "https://github.com/Sumesh1212/jenkins-example.git"]]]
 		    }
 		}
-	stage('SonarQube Analysis') {
-		def mvn = tool 'Default Maven';
-		withSonarQubeEnv() {
-			sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Sample:7899756022"
-		}
-	}	
+	stage('Sonar scan execution') {
+            // Run the sonar scan
+            steps {
+                script {
+                    def mvnHome = tool 'Maven 3.3.9'
+                    withSonarQubeEnv {
+
+                        sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
+                    }
+                }
+            }
+        }	
 }
