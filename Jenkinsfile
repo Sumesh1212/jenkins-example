@@ -19,11 +19,11 @@ pipeline {
 			    withSonarQubeEnv('SonarQube',envOnly: true) {
 				     sh "export PATH=/opt/sonar-scanner/bin:$PATH ; \
 				    sonar-scanner \
-				    -Dsonar.projectName="jenkins-example"
-				    -Dsonar.projectKey="Sample:7899756022"
+				    -Dsonar.projectName=jenkins-example
+				    -Dsonar.projectKey=Sample:7899756022
 				    -Dsonar.sources=${sonarProperties.projectName}				    
-				    -Dsonar.projectVersion="1.0"
-				    -Dsonar.branch.name="master"				    
+				    -Dsonar.projectVersion=1.0
+				    -Dsonar.branch.name=master				    
 			    }
 			    timeout(time: 10, unit: 'MINUTES') {
 				    waitForQualityGate abortPipeline: true
