@@ -5,10 +5,11 @@ pipeline {
 	stages{
 		stage ('Git Install') {
 			steps{				
-				checkout changelog: false, 
+				/*checkout changelog: false, 
 					poll: false, 
 					scm: [$class: 'GitSCM', branches: [[name: 'master']], extensions: [], 
-					      userRemoteConfigs: [[credentialsId: 'Github',url: 'https://github.com/Sumesh1212/jenkins-example.git']]];
+					      userRemoteConfigs: [[credentialsId: 'Github',url: 'https://github.com/Sumesh1212/jenkins-example.git']]];*/
+				git credentialsId: 'Github_Token', branch: 'Sample1', url: 'https://github.com/Sumesh1212/jenkins-example.git'
 			}
 		}			
 		stage('Sonar scan execution') {
