@@ -14,17 +14,13 @@ pipeline {
         }
 
         stage ('Sonarqube Analysis') {
-            steps {
-		    steps {
-			    def scannerhome = tool 'Sonar-Scanner';
-			    withSonarQubeEnv('SonarQube') {
-				    sh """${scannerhome}/bin/sonar-runner -D sonar.login = admin -D sonar.password = Sumesh@1294 """
-			    }
-			    timeout(time: 10, unit: 'MINUTES') {
-				    waitForQualityGate abortPipeline: true
-			    }
-		    }
-	    }
+		def scannerhome = tool 'Sonar-Scanner';
+		withSonarQubeEnv('SonarQube') {
+			sh """${scannerhome}/bin/sonar-runner -D sonar.login = admin -D sonar.password = Sumesh@1294 """
+		}
+		timeout(time: 10, unit: 'MINUTES') {
+			waitForQualityGate abortPipeline: true
+		}	
 	}
     }
 }
