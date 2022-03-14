@@ -18,7 +18,7 @@ pipeline {
 			    def mvnHome = tool 'Maven 3.3.9'
 			    withSonarQubeEnv {
 
-				sh "'${mvnHome}/bin/mvn'  verify sonar:sonar -Dintegration-tests.skip=true -Dmaven.test.failure.ignore=true"
+				sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Sample:7899756022"
 			    }
 			}
 		    }
