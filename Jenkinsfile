@@ -4,11 +4,7 @@ pipeline {
     agent any
 	stages{
 		stage ('Git Install') {
-			    steps {                                     
-				/*checkout changelog: false, 
-					poll: false, 
-					scm: [$class: 'GitSCM', branches: [[name: pipelineBranch]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], 
-					userRemoteConfigs: [[credentialsId: 'GitHub_Token', url: "https://github.com/Sumesh1212/jenkins-example.git"]]]*/
+			    steps {                                     				
 				checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github_Token',url: 'https://github.com/Sumesh1212/jenkins-example.git']]]
 			    }
 			}
@@ -16,7 +12,7 @@ pipeline {
 		    // Run the sonar scan
 		    steps {
 			script {
-			    def mvnHome = tool 'Maven 3.3.9'
+			    def mvnHome = tool 'SonarScanner 2.8'
 			    withSonarQubeEnv {
 
 				sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Sample:7899756022"
