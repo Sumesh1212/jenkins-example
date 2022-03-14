@@ -9,7 +9,8 @@ pipeline {
 					poll: false, 
 					scm: [$class: 'GitSCM', branches: [[name: 'master']], extensions: [], 
 					      userRemoteConfigs: [[credentialsId: 'Github',url: 'https://github.com/Sumesh1212/jenkins-example.git']]];*/
-				git credentialsId: 'Github_Token', branch: 'Sample1', url: 'https://github.com/Sumesh1212/jenkins-example.git'
+				///git credentialsId: 'Github_Token', branch: 'Sample1', url: 'https://github.com/Sumesh1212/jenkins-example.git'
+				echo "Hello"
 			}
 		}			
 		stage('Sonar scan execution') {
