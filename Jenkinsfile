@@ -17,8 +17,13 @@ pipeline {
             steps {
 		    steps {
 			    withSonarQubeEnv('SonarQube',envOnly: true) {
-				    ///sh "${scannerHome}/bin/sonar-scanner"
-				    println ${env.SONAR_HOST_URL}
+				     sh "export PATH=/opt/sonar-scanner/bin:$PATH ; \
+				    sonar-scanner \
+				    -Dsonar.projectName="jenkins-example" \
+				    -Dsonar.projectKey="Sample:7899756022" \
+				    -Dsonar.sources=${sonarProperties.projectName} \				    
+				    -Dsonar.projectVersion="1.0" \
+				    -Dsonar.branch.name="master" \				    
 			    }
 			    timeout(time: 10, unit: 'MINUTES') {
 				    waitForQualityGate abortPipeline: true
